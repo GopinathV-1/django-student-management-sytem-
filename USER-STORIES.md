@@ -4,9 +4,8 @@
 
 #### Personas
 
-   1. School Management: The person who manages teacher, student, and assignment
-   2. Teacher: The person who writes Assignment posts
-   3. Student: The person who reads Assignment posts
+   1. Teacher: The person who writes Assignment posts
+   2. Student: The person who reads Assignment posts
 
 
 #### User Stories
@@ -22,10 +21,9 @@
    * As a teacher *ISBAT create assignment post.
    * As a teacher *ISBAT delete my own assignment post.
    * As a teacher *ISBAT update my assignment post.
-   * As a teacher *ISBAT update list student.
-   * As a teacher *ISBAT see an error page if I enter a wrong URL. (Error Handling)
+   * As a teacher *ISBAT list student.
+   * As a teacher *ISBAT delete and create student.
    * As a student *ISBAT see an error page if I enter a wrong URL. (Error Handling)
-   * As a School Management *ISBAT can create, delete, and update students account, teachers account, and assignment.
   
 #### Bonus:
 
