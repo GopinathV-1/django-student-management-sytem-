@@ -1,6 +1,6 @@
-# Flask User Stories
+# Django User Stories
 
-## Student Management System with Authentication in Flask
+## Student Management System with Authentication in Django
 
 #### Personas
 

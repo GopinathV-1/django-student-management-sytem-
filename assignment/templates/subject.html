@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in users %}
+    <article class="content-section">
+        <div class="media article-metadata">
+          <div>
+            <a href="{% url 'subject'%}?subject={{ post.subject }}"><h3>{{ post.subject}}</h3></a>
+          </div>
+        </div>
+        <div class="article-metadata">
+          <h3 class="article-title">{{ post.title}}</a></h3>
+          <h4 class="article-content">{{ post.content }}</h4>
+        </div>
+        <div class="media">
+          <div>
+            <p><span class="span">{{'Due Date: '}}</span>{{ post.due_date|date:"F d, Y" }}</p>
+          </div>
+        <div>
+          <p><span class="span">{{'Assigned by: '}}</span>{{post.staff}}</p>
+        </div>
+        </div>
+      </article>
+    {% endfor %}
+    {% if users.has_other_pages %}
+    <ul class="pagination">
+      {% if users.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </ul>
+    {% endif %}
+{% endblock content %}

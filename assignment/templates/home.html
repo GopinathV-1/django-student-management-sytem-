@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="data:;base64,=">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+    {% if title %}
+        <title>Student - {{ title }}</title>
+    {% else %}
+        <title>Studentapp</title>
+    {% endif %}
+</head>
+<body>
+    <nav class="navbar fixed-top">
+      <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="#" class="navbar-brand">STUDENT.COM</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Subject <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'subject'%}?subject={{ 'English' }}">English</a></td></li>
+                                    <li><a href="{% url 'subject'%}?subject={{ 'Tamil' }}">Tamil</a></li>
+                                    <li><a href="{% url 'subject'%}?subject={{ 'Maths' }}">Maths</a></li>
+                                    <li><a href="{% url 'subject'%}?subject={{ 'Physics' }}">Physics</a></li>
+                                    <li><a href="{% url 'subject'%}?subject={{ 'Chemistry' }}">Chemistry</a></li>
+                                    <li><a href="{% url 'subject'%}?subject={{ 'Biology' }}">Biology</a></li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form method="" action="" class="navbar-form">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" name="tag" id="tag" placeholder="Search Assignments Here..." class="form-control">
+                                            <span class="input-group-addon"><input type="submit" value="search" name=""></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                        {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav navbar-right">
+                          <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                           <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                        {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </nav>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+          {% endif %}
+          {% for post in users %}
+          <article class="content-section">
+            <div class="media article-metadata">
+                <a href="{% url 'subject'%}?subject={{ post.subject }}">
+                  <h3>{{ post.subject}}</h3>
+                </a>
+            </div>
+            <div class="article-metadata">
+              <h3 class="article-title">{{ post.title}}</a></h3>
+              <h4 class="article-content">{{ post.content }}</h4>
+            </div>
+            <div class="media">
+              <div>
+                <p>
+                  <span class="span">{{'Due Date: '}}</span>{{ post.due_date|date:"F d, Y" }}
+                </p>
+              </div>
+              <div>
+                <p>
+                  <span class="span">{{'Assigned by: '}}</span>{{post.staff}}</a>
+                </p>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+          {% if users.has_other_pages %}
+            <ul class="pagination">
+            {% if users.has_previous %}
+            <li>
+              <a href="?page={{ users.previous_page_number }}">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="disabled">
+              <span>&laquo;</span>
+            </li>
+          {% endif %}
+          {% for i in users.paginator.page_range %}
+          {% if users.number == i %}
+            <li class="active">
+              <span>{{ i }} <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% else %}
+            <li>
+              <a href="?page={{ i }}">{{ i }}</a>
+            </li>
+          {% endif %}
+          {% endfor %}
+          {% if users.has_next %}
+            <li>
+              <a href="?page={{ users.next_page_number }}">&raquo;</a>
+            </li>
+          {% else %}
+            <li class="disabled">
+              <span>&raquo;</span>
+            </li>
+          {% endif %}
+          </ul>
+        {% endif %}
+        </div>
+      </div>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>
