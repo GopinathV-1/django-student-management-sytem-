@@ -11,9 +11,9 @@ def home(request):
         posts = Assignment.objects.filter(title__icontains=tag)
     else:
         posts = Assignment.objects.all()
-    page = request.GET.get('page', 3)
+    page = request.GET.get('page', 1)
 
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 3)
     try:
         users = paginator.page(page)
     except PageNotAnInteger:
@@ -26,17 +26,12 @@ def home(request):
 
 @login_required
 def subject(request):
-    try:
-        query = request.GET.get('subject')
-        posts = Assignment.objects.filter(subject=query)
-    except Exception as e:
-        query = request.GET.get('staff')
-        posts = Assignment.objects.filter(staff=query)
-        print(query, posts, e)
+    query = request.GET.get('subject')
+    posts = Assignment.objects.filter(subject=query)
 
-    page = request.GET.get('page', 3)
+    page = request.GET.get('page', 1)
 
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 3)
     try:
         users = paginator.page(page)
     except PageNotAnInteger:
