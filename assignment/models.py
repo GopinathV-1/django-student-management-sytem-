@@ -19,8 +19,5 @@ class Assignment(models.Model):
     due_date = models.DateField()
     subject = models.CharField(max_length=10, choices=SUBJECT_CHOICES)
 
-    class Meta:
-        ordering = ['-id']
-
     def __str__(self):
         return self.title
