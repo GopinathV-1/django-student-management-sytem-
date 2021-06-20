@@ -19,6 +19,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from student import views as user_views
+from django.conf.urls import (handler404, handler403,
+                              handler500, url)
+from django.views.static import serve as mediaserve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,5 +54,9 @@ urlpatterns = [
          name='password_reset_complete'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns.append(url(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',
+                   mediaserve, {'document_root': settings.MEDIA_ROOT}))
+
+handler404 = 'student.views.error_404'
+handler403 = 'student.views.error_403'
+handler500 = 'student.views.error_500'

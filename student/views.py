@@ -4,6 +4,18 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
+def error_404(request, exception):
+    return render(request, '404.html')
+
+
+def error_403(request, exception):
+    return render(request, '403.html')
+
+
+def error_500(request, *args, **argv):
+    return render(request, '500.html', status=500)
+
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
