@@ -15,9 +15,6 @@
    * As a student *ISBAT login. (Authentication)
    * As a student *ISBAT update profile.
    * As a student *ISBAT view in-charge teachers.
-   * As a teacher *ISBAT register. (Sign Up)
-   * As a teacher *ISBAT login. (Authentication)
-   * As a teacher *ISBAT update profile.
    * As a teacher *ISBAT create assignment post.
    * As a teacher *ISBAT delete my own assignment post.
    * As a teacher *ISBAT update my assignment post.
