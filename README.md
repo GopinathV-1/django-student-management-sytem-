@@ -20,6 +20,39 @@ To get started with the code on this repo, you need to either *clone* or *downlo
 git clone git@gitlab.com:mountblue/cohort-16-python/gopinath_v/django-toy-project.git
 ```
 
+## Running the App
+
+### Part 1: Create Database and virtualenv
+
+### Create Database
+```bash
+$ sudo -u postgres psql
+```
+
+```bash
+postgres=# \i create_db.sql
+```
+
+```bash
+postgres=# \q
+```
+
+### Install the virtualenv package
+```bash
+$ pip install virtualenv
+```
+### Create the virtual environment
+To create a virtual environment, you must specify a path. You may provide any name in the place of <mypython>:
+```bash
+$ virtualenv <mypython>
+```
+  
+### Activate the virtual environment
+```bash
+$ source mypython/bin/activate
+```
+
+Now you can load the requirements.txt.
 ## Dependencies
 
 Before running the application, you need to have some packages preinstalled. So I have provided all the required packages and their versions in requirements.txt file by running the below command you will be able to install all the packages.
@@ -27,8 +60,6 @@ Before running the application, you need to have some packages preinstalled. So 
 ```bash
 $ pip install -r requirements.txt
 ```
-
-## Running the App
 
 #### Part 1: Create and provide information to .env file.
 
@@ -66,41 +97,11 @@ $ python3
 ```
 Provide **email id and password** in .env file. 
 
-### Part 2: Create Database and virtualenv
-
-### Create Database
-```bash
-$ sudo -u postgres psql
-```
-
-```bash
-postgres=# \i create_db.sql
-```
-
-```bash
-postgres=# \q
-```
-
-### Install the virtualenv package
-```bash
-$ pip install virtualenv
-```
-### Create the virtual environment
-To create a virtual environment, you must specify a path. You may provide any name in the place of <mypython>:
-```bash
-$ virtualenv <mypython>
-```
-  
-### Activate the virtual environment
-```bash
-$ source mypython/bin/activate
-```
-
-Now you can load the requirements.txt.
-
 #### for creating and accessing admin operations create superuser
 
 ```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
 python3 manage.py createsuperuser
 ```
 ##### Note: provide your username and password in required place to create admin user.
