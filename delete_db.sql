@@ -1,1 +1,2 @@
 DROP DATABASE test;
+DROP USER test;

@@ -1,2 +1,3 @@
-#ingnore a file
+#ingnore files
 studentapp/.env
+__pycache__
