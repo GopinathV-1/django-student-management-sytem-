@@ -88,7 +88,7 @@ SECURITY_KEY=GENERATED_ONE
 
 #### open the terminal
 
-### SECRET_KEY generation
+#### SECRET_KEY generation
 
 ```bash
 $ python3
