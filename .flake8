@@ -1,0 +1,1 @@
+exclude = studentapp/settings.py, studentapp/urls.py, assignment/migrations, student/migrations, pycache, assignment/tests.py, student/apps.py, student/tests.py
